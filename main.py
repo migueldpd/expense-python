@@ -22,11 +22,11 @@ while (option != 7):
         dicionariosDados = {"despesa": despesa,"categoria":categoria,"valor":valor}
         despesas.append(dicionariosDados)
         print(despesas)
-    elif option == 2:
+    elif option == 2:#menu concluido
         print("-- VER DESPESAS --")
         for x in despesas:
             print(x)
-    elif option == 3:
+    elif option == 3:#menu concluido
         print("-- TOTAL GASTO --")
         soma = 0
         for x in despesas:
@@ -41,17 +41,35 @@ while (option != 7):
         print("4- Filtrar por intervalo de valores")
         print("5- Filtrar por nome")
         print("6- Voltar")
-        x = input("-> ")
+        x = input(": ")
         if int(x) == 1:
             print("...filtrar por categoria...")
         elif int(x) == 2:
-            print("...filtrar por valor minimo...")
+            print("")
+            val_min = int(input("Insira o valor minimo para filtrar : "))
+            print("")
+            array_filtrado = [ x for x in despesas if x["valor"] >= val_min]
+            if not array_filtrado:
+                print("... data not found ...")
+            else:
+                for x in array_filtrado:    
+                    print(f"{x['despesa']} custou {x['valor']}$")
+            print("")
         elif int(x) == 3:
-            print("...filtrar por valor maximo...")    
+            print("")
+            val_max = int(input("Insira o valor maximo para filtrar : "))
+            print("")
+            array_filtrado = [ x for x in despesas if x["valor"] <= val_max]
+            if not array_filtrado:
+                print("... data not found ...")
+            else:
+                for x in array_filtrado:    
+                    print(f"{x['despesa']} custou {x['valor']}$")
+            print("")
         elif int(x) == 4:
-            print("...filtrar por intervalo...") 
+            print("...filtrar por intervalo...") #TO DO
         elif int(x) == 5:
-            print("...filtrar por nome...") 
+            print("...filtrar por nome...")  #TO DO
     elif option == 5:#menu concluido
         print("-- ORDENAR DESPESAS --")
         print("Escolha como quer ordenar as despesas :")

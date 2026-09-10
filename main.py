@@ -1,3 +1,4 @@
+from menus import *
 option = 0
 despesas = [{"despesa": "monster","categoria":"Sumo","valor":12},
             {"despesa": "redbull","categoria":"Sumo","valor":16},
@@ -5,27 +6,16 @@ despesas = [{"despesa": "monster","categoria":"Sumo","valor":12},
             {"despesa": "iPhone 17ProMax","categoria":"Lazer","valor":2000}]
 #despesas,categoria,valor e talvez data
 while (option != 7):
-    print("1- Adicionar despesa : ")
-    print("2- Ver despesas")
-    print("3- Total gasto")
-    print("4- Filtrar despesas")
-    print("5- Ordenar depesas")
-    print("6- Estatisticas")
-    print("7- Sair")
-    option = int(input("Escolhe um opção :"))
+    showMainMenu()
+    try:
+        option = int(input("Escolhe um opção :"))
+    except ValueError:
+        print("Value Error")
 
     if option == 1:
-        print("-- ADICIONAR DESPESA --")
-        despesa = input(str("Insere o nome da despesa : "))
-        categoria = input(str("Insere a categoria : "))
-        valor = input(str("Insere o valor da categoria : "))
-        dicionariosDados = {"despesa": despesa,"categoria":categoria,"valor":valor}
-        despesas.append(dicionariosDados)
-        print(despesas)
+        addExpense(despesas)
     elif option == 2:#menu concluido
-        print("-- VER DESPESAS --")
-        for x in despesas:
-            print(x)
+        checkExpenses(despesas)
     elif option == 3:#menu concluido
         print("-- TOTAL GASTO --")
         soma = 0
@@ -41,10 +31,14 @@ while (option != 7):
         print("4- Filtrar por intervalo de valores")
         print("5- Filtrar por nome")
         print("6- Voltar")
-        x = input(": ")
-        if int(x) == 1:
+        x=0
+        try:
+            x = int(input(": "))
+        except ValueError:
+            print("Value Error")
+        if x == 1:
             print("...filtrar por categoria...")
-        elif int(x) == 2:
+        elif x == 2:
             print("")
             val_min = int(input("Insira o valor minimo para filtrar : "))
             print("")
@@ -55,7 +49,7 @@ while (option != 7):
                 for x in array_filtrado:    
                     print(f"{x['despesa']} custou {x['valor']}$")
             print("")
-        elif int(x) == 3:
+        elif x == 3:
             print("")
             val_max = int(input("Insira o valor maximo para filtrar : "))
             print("")
@@ -66,9 +60,9 @@ while (option != 7):
                 for x in array_filtrado:    
                     print(f"{x['despesa']} custou {x['valor']}$")
             print("")
-        elif int(x) == 4:
+        elif x == 4:
             print("...filtrar por intervalo...") #TO DO
-        elif int(x) == 5:
+        elif x == 5:
             print("...filtrar por nome...")  #TO DO
     elif option == 5:#menu concluido
         print("-- ORDENAR DESPESAS --")

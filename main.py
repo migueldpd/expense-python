@@ -1,8 +1,9 @@
 from menus import *
 option = 0
-despesas = [{"despesa": "monster","categoria":"Sumo","valor":12},
-            {"despesa": "redbull","categoria":"Sumo","valor":16},
+despesas = [{"despesa": "Monster","categoria":"Sumo","valor":12},
+            {"despesa": "Redbull","categoria":"Sumo","valor":16},
             {"despesa": "Huawei GT6","categoria":"Lazer","valor":200},
+            {"despesa": "Autocarro","categoria":"Transporte","valor":2},
             {"despesa": "iPhone 17ProMax","categoria":"Lazer","valor":2000}]
 #despesas,categoria,valor e talvez data
 while (option != 7):
@@ -11,7 +12,6 @@ while (option != 7):
         option = int(input("Escolhe um opção :"))
     except ValueError:
         print("Value Error")
-
     if option == 1:
         addExpense(despesas)
     elif option == 2:#menu concluido
@@ -37,7 +37,26 @@ while (option != 7):
         except ValueError:
             print("Value Error")
         if x == 1:
-            print("...filtrar por categoria...")
+            print("Filtrar por Categoria")
+            #primeiro mostrar categorias que existem
+            lista_categorias = []
+            count = 1
+            for x in despesas:
+                if x['categoria'] not in lista_categorias:
+                    lista_categorias.append(x['categoria'])
+            for x in lista_categorias:
+                print(f"{count}-{x}")
+                count += 1
+            filtro = int(input("Escolha a opçao referente à categoria que quer filtrar: "))
+            filtro -= 1
+            if(filtro >= 0 and filtro <= len(lista_categorias)-1):
+                print("")
+                print(f"Despesas relativas à categoria {lista_categorias[filtro]}")
+                for x in despesas :
+                    if x['categoria'] == lista_categorias[filtro]:
+                        print(f"{x['despesa']}-{x['valor']}$")
+            else:
+                print("data not found")
         elif x == 2:
             print("")
             val_min = int(input("Insira o valor minimo para filtrar : "))
@@ -61,7 +80,21 @@ while (option != 7):
                     print(f"{x['despesa']} custou {x['valor']}$")
             print("")
         elif x == 4:
-            print("...filtrar por intervalo...") #TO DO
+            print("")
+            number_x = input("Insira o primeiro numero do intervalo :")
+            number_y = input("Insira o segundo numero do intervalo :")
+            if(int(number_x) < 0 or int(number_y) < 0):
+                print("Nao pode por um intervalo com numeros negativos")
+            elif(int(number_x) == int(number_y)):
+                print("Nao pode inserir intervalos com valores iguais")
+            else:
+                print("")
+                num_min = int(min(number_x,number_y))
+                num_max = int(max(number_x,number_y))
+                print(f"Mostrar as despesas dentro do intervalo {num_min} e {num_max}")
+                filter_int = list(filter(lambda x:num_min <= x['valor'] <= num_max,despesas))
+                for x in filter_int:
+                    print(f"{x['despesa']} custou {x['valor']}$")
         elif x == 5:
             print("...filtrar por nome...")  #TO DO
     elif option == 5:#menu concluido

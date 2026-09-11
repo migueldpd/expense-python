@@ -2,6 +2,7 @@ from menus import *
 option = 0
 despesas = [{"despesa": "Monster","categoria":"Sumo","valor":12},
             {"despesa": "Redbull","categoria":"Sumo","valor":16},
+            {"despesa": "Monster","categoria":"Sumo","valor":4},
             {"despesa": "Huawei GT6","categoria":"Lazer","valor":200},
             {"despesa": "Autocarro","categoria":"Transporte","valor":2},
             {"despesa": "iPhone 17ProMax","categoria":"Lazer","valor":2000}]
@@ -96,7 +97,10 @@ while (option != 7):
                 for x in filter_int:
                     print(f"{x['despesa']} custou {x['valor']}$")
         elif x == 5:
-            print("...filtrar por nome...")  #TO DO
+            print("")
+            print("Procurar despesa pelo nome :")  
+            procurar_nome = str(input(": "))
+            displayDespesa(procurar_nome,despesas)
     elif option == 5:#menu concluido
         print("-- ORDENAR DESPESAS --")
         print("Escolha como quer ordenar as despesas :")

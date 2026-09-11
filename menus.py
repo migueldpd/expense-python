@@ -20,4 +20,14 @@ def checkExpenses(despesas):
     print("-- VER DESPESAS --")#formatar print
     for x in despesas:
         print(f"Nome: {x['despesa']} | Categoria: {x['categoria']} | Valor: {x['valor']}$")
+
+def displayDespesa(user_input,despesas):
+    items_found = 0
+    for x in despesas:
+        if user_input == x["despesa"]:
+            print(f"{x['despesa']}-{x['categoria']}-{x['valor']}$")
+            items_found += 1
+    if items_found == 0:
+        print("Dados nao encontrados, por favor insira outra despesa")
+        print("")
     

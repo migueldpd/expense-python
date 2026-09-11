@@ -90,8 +90,8 @@ while (option != 7):
                 print("Nao pode inserir intervalos com valores iguais")
             else:
                 print("")
-                num_min = int(min(number_x,number_y))
-                num_max = int(max(number_x,number_y))
+                num_min = min(int(number_x),int(number_y))
+                num_max = max(int(number_x),int(number_y))
                 print(f"Mostrar as despesas dentro do intervalo {num_min} e {num_max}")
                 filter_int = list(filter(lambda x:num_min <= x['valor'] <= num_max,despesas))
                 for x in filter_int:
@@ -157,27 +157,31 @@ while (option != 7):
         print(" ")
         print("-- ESTATISTICAS --")
         #numero total de despesas
-        print(f"Voce tem um total de {len(despesas)} despesa/s")
-        #total gasto
-        soma = [ int(x["valor"]) for x in despesas ]
-        print(f"Total gasto foi {sum(soma)} euros")
-        #media por despesa
-        print(f"Media por despesa e de {sum(soma)/len(despesas)} euros")
-        #despesa mais cara
-        print(f"A despesa mais cara foi de {max(soma)}")
-        #despesa mais barata
-        print(f"A despesa mais barata foi de {min(soma)}")
-        #total gasto por categoria
-        gasto_por_categoria = {}
-        for x in despesas:
-            if x["categoria"] not in gasto_por_categoria:
-                gasto_por_categoria.update({x["categoria"]:int(x["valor"])})
-            else:
-                gasto_por_categoria[x["categoria"]] += int(x["valor"])
-        for x in gasto_por_categoria:
-            print(f"{x} : {gasto_por_categoria.get(x)}")                
-        #categoria onde gastaste mais dinheiro
-        categoria_despendiosa = max(gasto_por_categoria , key=gasto_por_categoria.get)
-        valor_despendioso = gasto_por_categoria[categoria_despendiosa]
-        print(f"A categoria onde mais gastaste dinheiro foi {categoria_despendiosa} num total de {valor_despendioso}")
-        print(" ")        
+        if not despesas:
+            print("Impossivel mostrar estatisticas sem dados")
+            print("")
+        else:
+            print(f"Voce tem um total de {len(despesas)} despesa/s")
+            #total gasto
+            soma = [ int(x["valor"]) for x in despesas ]
+            print(f"Total gasto foi {sum(soma)} euros")
+            #media por despesa
+            print(f"Media por despesa e de {sum(soma)/len(despesas)} euros")
+            #despesa mais cara
+            print(f"A despesa mais cara foi de {max(soma)}")
+            #despesa mais barata
+            print(f"A despesa mais barata foi de {min(soma)}")
+            #total gasto por categoria
+            gasto_por_categoria = {}
+            for x in despesas:
+                if x["categoria"] not in gasto_por_categoria:
+                    gasto_por_categoria.update({x["categoria"]:int(x["valor"])})
+                else:
+                    gasto_por_categoria[x["categoria"]] += int(x["valor"])
+            for x in gasto_por_categoria:
+                print(f"{x} : {gasto_por_categoria.get(x)}")                
+            #categoria onde gastaste mais dinheiro
+            categoria_despendiosa = max(gasto_por_categoria , key=gasto_por_categoria.get)
+            valor_despendioso = gasto_por_categoria[categoria_despendiosa]
+            print(f"A categoria onde mais gastaste dinheiro foi {categoria_despendiosa} num total de {valor_despendioso}")
+            print(" ")        
